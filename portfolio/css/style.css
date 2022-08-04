@@ -37,6 +37,16 @@ body {
     padding: 8px 10px;
     margin: 10px 0;
     text-decoration: none;
+    color: blue;
+}
+
+.nav .active a {
+    background-color: blueviolet;
+    color: white;
+}
+
+.nav .active {
+    padding-right: 0px;
 }
 
 .content {
@@ -55,7 +65,7 @@ body {
     margin-right: 20px;
 }
 
-hr{
+footer {
     clear: both;
 }
 
