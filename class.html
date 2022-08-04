@@ -3,8 +3,19 @@
 <head>
     <title>Class</title>
     <style>
-        table{
+        table, td, th{
             margin-top: 20px;
+            border: 1px solid;
+            border-collapse: collapse;
+            padding: 5px 10px;
+        }
+        th {
+            background-color: rgb(128, 255, 0);
+        }
+        .links span{
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -14,12 +25,14 @@
     Age: <input type="number" id="age"><br>
     Gender: 
     <select id="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
     </select><br>
     Location: <input type="text" id="location"><br>
-    <button onclick="addStudent()">Add</button>
-    <table id="studs" border="1"></table>
+    <input type="hidden" id="id">
+    <button onclick="addStudent()">Submit</button>
+    <button onclick="reset()">Reset</button>
+    <table id="studs"></table>
     <script>
         class Student{
             constructor(name, cl, age, gender, location){
@@ -46,8 +59,8 @@
                 }
             }
 
-            setAge (age){
-                if (typeof(age) === Number){
+            setAge(age){
+                if (typeof(age) === 'number'){
                     this.age = age
                 }else{
                     alert('Age should be number')
@@ -103,14 +116,13 @@
             const header = '<tr><th>No.</th><th>Name</th><th>Class</th><th>Age</th><th>Gender</th><th>Location</th><th>Actions</th></tr>'
             var rows = ''
             students.forEach((student, id) => {
-                student.display();
                 rows += '<tr><td>' + (id + 1) + '</td>'
                     + '<td>' + student.name + '</td>'
                     + '<td>' + student.cl + '</td>'
                     + '<td>' + student.age + '</td>'
                     + '<td>' + student.gender + '</td>'
                     + '<td>' + student.location + '</td>'
-                    + `<td><span onClick="editS(${id})">edit</span> <span onClick="deleteS(${id})">delete</span></td>` + '</tr>'
+                    + `<td class="links"><span onClick="editS(${id})">edit</span> <span onClick="deleteS(${id})">delete</span></td>` + '</tr>'
             });
             document.getElementById('studs').innerHTML = header + rows
         }
@@ -121,12 +133,37 @@
             const age = Number(document.getElementById('age').value);
             const gender = document.getElementById('gender').value;
             const location = document.getElementById('location').value;
-            students.push(new Student(name, cla, age, gender, location))
+            if(document.getElementById('id').value == ''){
+                students.push(new Student(name, cla, age, gender, location));    
+            }else{
+                id = Number(document.getElementById('id').value)
+                students[id].setName(name);
+                students[id].setClass(cla);
+                students[id].setAge(age);
+                console.log(typeof(age));
+                students[id].setGender(gender);
+                students[id].setLocation(location);
+            }
+            reset();
             listAll();
         }
 
         function editS(id){
-            console.log(id);
+            document.getElementById('id').value = id;
+            document.getElementById('name').value = students[id].name;
+            document.getElementById('class').value = students[id].cl;
+            document.getElementById('age').value = students[id].age;
+            document.getElementById('gender').value = students[id].gender;
+            document.getElementById('location').value = students[id].location;
+        }
+
+        function reset() {
+            document.getElementById('id').value = ''
+            document.getElementById('name').value = ''
+            document.getElementById('class').value = ''
+            document.getElementById('age').value = null
+            document.getElementById('gender').value = 'Male'
+            document.getElementById('location').value = ''
         }
 
         function deleteS(id){
@@ -135,9 +172,11 @@
         }
 
         students = []
-        students.push(new Student('Tom', 5, 10, 'M', 'US'))
-        students.push(new Student('Jerry', 6, 11, 'M', 'US'))
+        // students.push(new Student('Tom', 5, 10, 'Male', 'US'))
+        // students.push(new Student('Jerry', 6, 11, 'Male', 'US'))
+        // students.push(new Student('Daisy', 6, 11, 'Female', 'UK'))
 
+        reset();
         listAll();
     </script>
 </body>
