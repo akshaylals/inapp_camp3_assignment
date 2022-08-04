@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Class</title>
+    <style>
+        table{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    Name: <input type="text" id="name"><br>
+    Class: <input type="text" id="class"><br>
+    Age: <input type="number" id="age"><br>
+    Gender: 
+    <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select><br>
+    Location: <input type="text" id="location"><br>
+    <button onclick="addStudent()">Add</button>
+    <table id="studs" border="1"></table>
+    <script>
+        class Student{
+            constructor(name, cl, age, gender, location){
+                this.name = name;
+                this.cl = cl;
+                this.age = age;
+                this.gender = gender;
+                this.location = location;
+            }
+
+            setName(name) {
+                if (name !== ''){
+                    this.name = name
+                }else{
+                    alert('Name cannot be empty')
+                }
+            }
+
+            setClass(cl){
+                if (cl !== ''){
+                    this.cl = cl
+                }else{
+                    alert('Class cannot be empty')
+                }
+            }
+
+            setAge (age){
+                if (typeof(age) === Number){
+                    this.age = age
+                }else{
+                    alert('Age should be number')
+                }
+            }
+
+            setGender(gender){
+                if (gender !== ''){
+                    this.gender = gender;
+                }else{
+                    alert('Gender cannot be empty')
+                }
+            }
+
+            setLocation(loc){
+                if (loc !== ''){
+                    this.location = loc;
+                }else{
+                    alert('Location cannot be empty')
+                }
+            }
+
+            delName(){
+                delete this.name;
+            }
+
+            delClass(){
+                delete this.cl;
+            }
+
+            delAge(){
+                delete this.age;
+            }
+
+            delGender(){
+                delete this.gender;
+            }
+
+            delLocation(){
+                delete this.location;
+            }
+
+            display(){
+                console.log('Name:', this.name);
+                console.log('Class:', this.cl);
+                console.log('Age:', this.age);
+                console.log('Gender:', this.gender);
+                console.log('Location:', this.location);
+            }
+        }
+
+        function listAll() {
+            const header = '<tr><th>No.</th><th>Name</th><th>Class</th><th>Age</th><th>Gender</th><th>Location</th><th>Actions</th></tr>'
+            var rows = ''
+            students.forEach((student, id) => {
+                student.display();
+                rows += '<tr><td>' + (id + 1) + '</td>'
+                    + '<td>' + student.name + '</td>'
+                    + '<td>' + student.cl + '</td>'
+                    + '<td>' + student.age + '</td>'
+                    + '<td>' + student.gender + '</td>'
+                    + '<td>' + student.location + '</td>'
+                    + `<td><span onClick="editS(${id})">edit</span> <span onClick="deleteS(${id})">delete</span></td>` + '</tr>'
+            });
+            document.getElementById('studs').innerHTML = header + rows
+        }
+
+        function addStudent(){
+            const name = document.getElementById('name').value;
+            const cla = document.getElementById('class').value;
+            const age = Number(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            const location = document.getElementById('location').value;
+            students.push(new Student(name, cla, age, gender, location))
+            listAll();
+        }
+
+        function editS(id){
+            console.log(id);
+        }
+
+        function deleteS(id){
+            delete students[id];
+            listAll();
+        }
+
+        students = []
+        students.push(new Student('Tom', 5, 10, 'M', 'US'))
+        students.push(new Student('Jerry', 6, 11, 'M', 'US'))
+
+        listAll();
+    </script>
+</body>
+</html>
