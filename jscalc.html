@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calc.js</title>
+    <style>
+        table, td {
+            border: 1px solid;
+        }
+
+        button {
+            height: 100%;
+            width: 100%;
+            color: white;
+            background-color: rgb(77, 0, 219);
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><button>C</button></td>
+            <td colspan="3"><input type="text" name="txtdisp" id="txtdisp" disabled></td>
+        </tr>
+        <tr>
+            <td><button>+</button></td>
+            <td><button>1</button></td>
+            <td><button>2</button></td>
+            <td><button>3</button></td>
+        </tr>
+        <tr>
+            <td><button>-</button></td>
+            <td><button>4</button></td>
+            <td><button>5</button></td>
+            <td><button>6</button></td>
+        </tr>
+        <tr>
+            <td><button>*</button></td>
+            <td><button>7</button></td>
+            <td><button>8</button></td>
+            <td><button>9</button></td>
+        </tr>
+        <tr>
+            <td><button>/</button></td>
+            <td><button>.</button></td>
+            <td><button>0</button></td>
+            <td><button>=</button></td>
+        </tr>
+    </table>
+</body>
+
+<script>
+    const txtDisp = document.getElementById('txtdisp')
+    var newExp = true
+
+    function btnPress(event) {
+        const inp = event.target.innerText
+        if (inp == 'C'){
+            txtDisp.value = ''
+        }else if (inp == '='){
+            txtDisp.value = eval(txtDisp.value);
+            newExp = true
+        }else{
+            if (newExp){
+                txtDisp.value = event.target.innerText
+                newExp = false
+            }else{
+                txtDisp.value += event.target.innerText
+            }
+        }
+    }
+
+    btnList = Array.prototype.slice.call(document.getElementsByTagName('button'))
+
+    btnList.forEach(btn => {
+        btn.addEventListener('click', btnPress)
+    });
+</script>
+</html>
