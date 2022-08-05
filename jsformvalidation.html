@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Form Validation</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            color: rgb(46, 46, 46);
+        }
+        label {
+            font-weight: bold;
+            font-size: small;
+        }
+
+        .err {
+            margin-top: 2px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form name="regForm" onsubmit="return validateForm()">
+        <h1>Registration Form</h1>
+        
+        <label for="txtfname">Full Name</label><br>
+        <input type="text" name="fname" id="txtfname"><br>
+        <p id="errfname" class="err"></p>
+
+        <label for="txtemail">Email address</label><br>
+        <input type="text" name="email" id="txtemail"><br>
+        <p id="erremail" class="err"></p>
+
+        <label for="txtphone">Phone (enter only 10 digit number)</label><br>
+        <input type="text" name="phone" id="txtphone"><br>
+        <p id="errphone" class="err"></p>
+
+        <label for="txtpass1">Password</label><br>
+        <input type="password" name="password1" id="txtpass1"><br>
+        <p id="errpass1" class="err"></p>
+
+        <label for="txtpass2">Confirm Password</label><br>
+        <input type="password" name="password2" id="txtpass2"><br>
+        <p id="errpass2" class="err"></p>
+
+        <input type="submit" value="Register">
+    </form>
+</body>
+<script>
+    function validateForm() {
+        const errfname = document.getElementById('errfname')
+        const erremail = document.getElementById('erremail')
+        const errphone = document.getElementById('errphone')
+        const errpass1 = document.getElementById('errpass1')
+        const errpass2 = document.getElementById('errpass2')
+
+        const frm = document.forms['regForm']
+
+        var valid = true
+
+        if (frm['fname'].value == ''){
+            errfname.innerHTML = 'Enter full name'
+            valid = false
+        }else{
+            errfname.innerHTML = ''
+        }
+
+        const email = frm['email'].value
+        if (email == ''){
+            erremail.innerHTML = 'Enter your email address'
+            valid = false
+        }else if(/.*@.*\..*/.test(email)){
+            erremail.innerHTML = ''
+        }else{
+            erremail.innerHTML = 'Enter valid email address'
+            valid = false
+        }
+
+        const phone = frm['phone'].value
+        if (phone == ''){
+            errphone.innerHTML = 'Enter a phone number'
+            valid = false
+        }else if(/[0-9]{10}/.test(phone)){
+            errphone.innerHTML = ''
+        }else{
+            errphone.innerHTML = 'Enter a valid phone number'
+            valid = false
+        }
+
+        if (frm['password1'].value == ''){
+            errpass1.innerHTML = 'Enter a password'
+            valid = false
+        }else{
+            errpass1.innerHTML = ''
+        }
+
+        if (frm['password2'].value == ''){
+            errpass2.innerHTML = 'Enter password for confirmation'
+            valid = false
+        }else if (frm['password1'].value != frm['password2'].value){
+            errpass2.innerHTML = 'Password do not match'
+            valid = false
+        }else{
+            errpass2.innerHTML = ''
+        }
+
+        return valid
+    }
+</script>
+</html>
