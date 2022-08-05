@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calc.js</title>
     <style>
+        *{
+            box-sizing: border-box;
+        }
+
         table, td {
             border: 1px solid;
         }
@@ -15,6 +19,12 @@
             width: 100%;
             color: white;
             background-color: rgb(77, 0, 219);
+            font-size: medium;
+        }
+
+        input{
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -64,7 +74,11 @@
             newExp = true
         }else{
             if (newExp){
-                txtDisp.value = event.target.innerText
+                if (txtDisp.value != '' && ['+', '-', '*', '/'].includes(inp)){
+                    txtDisp.value += event.target.innerText
+                }else{
+                    txtDisp.value = event.target.innerText
+                }
                 newExp = false
             }else{
                 txtDisp.value += event.target.innerText
