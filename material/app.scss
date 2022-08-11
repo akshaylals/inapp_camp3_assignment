@@ -1,0 +1,73 @@
+// appbar
+@use "@material/icon-button";
+@use "@material/icon-button/styles" as ib-styles;
+@use "@material/top-app-bar/mdc-top-app-bar";
+
+// tabs
+@use "@material/tab-bar/mdc-tab-bar";
+@use "@material/tab-scroller/mdc-tab-scroller";
+@use "@material/tab-indicator/mdc-tab-indicator";
+@use "@material/tab/mdc-tab";
+
+// data table
+@use "@material/data-table/data-table";
+
+// dialog
+@use "@material/dialog";
+
+
+// menu
+@use "@material/list/mdc-list";
+@use "@material/menu-surface/mdc-menu-surface";
+@use "@material/menu/mdc-menu";
+
+
+// images
+@use "@material/image-list/mdc-image-list";
+@use "@material/image-list";
+
+// radio
+@use "@material/radio/styles" as rd-style;
+@use "@material/form-field";
+
+// slider
+@use "@material/slider/styles" as sl-style;
+
+
+// snackbar
+@use "@material/snackbar/mdc-snackbar";
+
+
+// switch
+@use '@material/switch/styles' as sw-styles;
+
+
+// textbox
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/textfield";
+
+
+// tooltip
+@use "@material/tooltip/styles" as tt-styles;
+
+
+// images
+.my-image-list {
+  @include image-list.standard-columns(5);
+}
+
+
+
+
+// data table
+@include data-table.core-styles;
+@include data-table.theme-baseline;
+
+// dialog
+@include dialog.core-styles;
+
+
+// textbox
+@include textfield.core-styles;
