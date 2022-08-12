@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        ul{
+            list-style: disc;
+        }
+    </style>
+</head>
+<body>
+    <form enctype="multipart/form-data" action="feedback.py" method="post">
+        <ul>
+            <li><label>Name: <input type="text" name="name" id="name"></label><br></li>
+            <li><label>Email: <input type="email" name="email" id="email"></label><br></li>
+            <li><label>Password: <input type="password" name="password" id="password"></label><br></li>
+
+            <li>Please check all the emotions that apply to you:</li> 
+            <ul>
+                <li><label>Angry <input type="checkbox" name="emotion" value="angry"></label></li>
+                <li><label>Sad <input type="checkbox" name="emotion" value="sad"></label></li>
+                <li><label>Happy <input type="checkbox" name="emotion" value="happy"></label></li>
+                <li><label>Ambivalent <input type="checkbox" name="emotion" value="ambivalent"></label></li>
+            </ul>
+
+            <li>How satisfied were you with our service?</li> 
+            <ul>
+                <li><label>Very satisfied <input type="radio" name="satisfied" value="very satisfied"></label></li>
+                <li><label>Satisfied <input type="radio" name="satisfied" value="satisfied"></label></li>
+                <li><label>Didn't care <input type="radio" name="satisfied" value="didnt care"></label></li>
+                <li><label>Dissatisfied <input type="radio" name="satisfied" value="dissatisfied"></label></li>
+                <li><label>Very dissatisfied <input type="radio" name="satisfied" value="very dissatisfied"></label></li>
+            </ul>
+            
+            <li><label>Further comments: <textarea name="comments" cols="30" rows="10"></textarea></label></li>
+            <li><label>Bio photo: <input type="file" name="bio"></label></li>
+            <li><label>Location visited:
+                <select name="location">
+                    <option value="us">United States</option>
+                    <option value="canada">Canada</option>
+                </select>
+            </label></li>
+
+            <li><input type="submit" value="Submit"></li>
+        </ul>
+    </form>
+</body>
+</html>
